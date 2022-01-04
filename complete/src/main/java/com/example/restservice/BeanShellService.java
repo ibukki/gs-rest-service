@@ -4,6 +4,7 @@ import bsh.EvalError;
 import bsh.Interpreter;
 import com.example.restservice.bean.CalBase;
 import com.example.restservice.bean.ResultBean;
+import com.example.restservice.transform.ScriptValidator;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -26,7 +27,9 @@ public class BeanShellService {
     if(cb.getInput1() < 5 && cb.getInput2() >2){
       rsb.setValue(1);
     }
-    String condition = "if(cb.getInput1() > 5 && cb.getInput2() < 2){ rsb.setValue( cb.getInput1() * cb.getInput2() ); }";
+    String condition = "if(cb.input1 > 5 && cb.input2 < 2){ rsb.value = ( cb.getInput1() * cb.getInput2() + 20)  }";
+    ScriptValidator validator = new ScriptValidator();
+    condition = validator.validate(condition);
 
 // Eval a statement and get the result
     interpreter.eval(condition);
