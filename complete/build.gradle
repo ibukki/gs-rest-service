@@ -14,7 +14,10 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.projectlombok:lombok:1.18.20'
+	implementation 'bsh:bsh:2.0b4'
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
+	annotationProcessor 'org.projectlombok:lombok:1.18.20'
 }
 
 test {
