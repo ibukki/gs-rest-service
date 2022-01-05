@@ -1,4 +1,4 @@
-package com.example.restservice;
+package com.sap.gs.hcm.rule;
 
 public class Greeting {
 

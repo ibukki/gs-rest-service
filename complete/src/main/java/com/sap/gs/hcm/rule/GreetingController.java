@@ -1,4 +1,4 @@
-package com.example.restservice;
+package com.sap.gs.hcm.rule;
 
 import java.util.concurrent.atomic.AtomicLong;
 

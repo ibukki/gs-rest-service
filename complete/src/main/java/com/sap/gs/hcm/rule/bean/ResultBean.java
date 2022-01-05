@@ -1,4 +1,4 @@
-package com.example.restservice.bean;
+package com.sap.gs.hcm.rule.bean;
 
 import lombok.Data;
 

@@ -1,13 +1,11 @@
-package com.example.restservice;
+package com.sap.gs.hcm.rule;
 
 import bsh.EvalError;
 import bsh.Interpreter;
-import com.example.restservice.bean.CalBase;
-import com.example.restservice.bean.ResultBean;
-import com.example.restservice.transform.ScriptValidator;
+import com.sap.gs.hcm.rule.bean.CalBase;
+import com.sap.gs.hcm.rule.bean.ResultBean;
+import com.sap.gs.hcm.rule.transform.ScriptValidator;
 import org.springframework.stereotype.Service;
-
-import java.util.Date;
 
 @Service
 public class BeanShellService {
@@ -27,7 +25,7 @@ public class BeanShellService {
     if(cb.getInput1() < 5 && cb.getInput2() >2){
       rsb.setValue(1);
     }
-    String condition = "if(cb.input1 > 5 && cb.input2 < 2){ rsb.value = ( cb.getInput1() * cb.getInput2() + 20)  }";
+    String condition = "if(cb.input1 > 5 && cb.input2 < 2){ rsb.value = ( cb.getInput1() * cb.getInput2() + 20)  } else { sayHi()}";
     ScriptValidator validator = new ScriptValidator();
     condition = validator.validate(condition);
 

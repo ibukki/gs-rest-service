@@ -1,7 +1,9 @@
-package com.example.restservice.transform;
+package com.sap.gs.hcm.rule.transform;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ScriptValidator {
 
@@ -37,11 +39,25 @@ public class ScriptValidator {
     return input;
   }
 
+  public String traveseFunction(String input){
+    Pattern pattern = Pattern.compile("([a-zA-Z_{1}][a-zA-Z0-9_.]+)\\s*\\(");
+    Matcher matcher = pattern.matcher(input);
+    List<String> functionList = new ArrayList<String>();
+    while(matcher.find()){
+      String functionTmp = matcher.group(1);
+      if(!functionTmp.equalsIgnoreCase("if") && functionTmp.indexOf(".") < 0){
+         functionList.add(functionTmp);
+      }
+    }
+    return input;
+  }
+
   public static void main(String[] args) {
     ScriptValidator validator = new ScriptValidator();
-    String s = "if(cb.input1 > 2 && cb.input2 > 5) { { cb.output = 5 } } else { { cb.output = 4   } }";
+    String s = "if(cb.input1 > 5 && cb.input2 < 2){ rsb.value = ( cb.getInput1 () * cb.getInput2() + 20)  } else { sayHi ()}";
 
-    System.out.println(validator.validate(s));
+    s = validator.validate(s);
+    s = validator.traveseFunction(s);
   }
 
 
