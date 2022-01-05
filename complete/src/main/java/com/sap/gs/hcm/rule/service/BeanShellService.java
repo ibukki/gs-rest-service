@@ -1,4 +1,4 @@
-package com.sap.gs.hcm.rule;
+package com.sap.gs.hcm.rule.service;
 
 import bsh.EvalError;
 import bsh.Interpreter;
