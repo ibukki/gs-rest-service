@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {Route, Routes} from "react-router-dom";
 import './App.css';
-import Canvas from './components/Canvas';
+import Stage from './components/Stage';
 
 function App() {
   return (
     <Routes>
-        <Route path="canvas" element={<Canvas></Canvas>}/>
+        <Route path="canvas" element={<Stage></Stage>}/>
         <Route path="/" element={<Home></Home>}/>
     </Routes>
   );

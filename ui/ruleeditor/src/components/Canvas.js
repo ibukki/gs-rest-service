@@ -2,22 +2,40 @@ import React, { useEffect, useState } from 'react'
 import Block from "./Block";
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
+import { useDrop } from 'react-dnd'
+import { ItemTypes } from './Constants';
 
 
 export default function Canvas(props) {
     let [cwidth,setCwidth] = useState("1000px")
     let [cheight,setCheight] = useState("800px")
 
+    const [{ isOver }, dropRef] = useDrop(() => ({
+        accept: ItemTypes.BLOCK,
+        drop: (item, monitor) => moveBlock(item,monitor),
+        collect: (monitor) => ({
+            isOver: !!monitor.isOver()
+        })
+    }))
+
+
     useEffect(()=>{
         console.log("init");
-        console.log(cheight);
     },[]);
 
-    return (<DndProvider backend={HTML5Backend}>
-            <div className="canvasRoot" style={{width:cwidth, height:cheight, border:'1px solid #ccc' ,background:'url(/gridbg.svg) repeat', position:'relative'}}>
-            
+    function moveBlock(item, monitor){
+        let targetOffset = monitor.getSourceClientOffset();
+        let sourceItem = document.getElementById(item.id);
+        sourceItem.style.top = targetOffset.y+"px";
+        sourceItem.style.left = targetOffset.x+"px";
+    }
+
+    return (
+        <div ref={dropRef} className="canvasRoot" style={{width:cwidth, height:cheight, border:'1px solid #ccc' ,background:'url(/gridbg.svg) repeat', position:'relative'}}>
+            <div style={{position:'absolute',height:'100%',width:'100%'}}>
                 This the canvas page
-                <Block></Block>
             </div>
-         </DndProvider>)
+        </div>
+        
+    )
 }

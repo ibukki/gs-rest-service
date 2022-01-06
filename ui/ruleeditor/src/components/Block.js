@@ -8,8 +8,9 @@ export default function Block(props) {
     let [cleft,setCleft] = useState(20);
     let [ctop,setCtop] = useState(25);
 
-    const [{isDragging}, drag] = useDrag(()=>({
+    const [{isDragging}, dragRef] = useDrag(()=>({
         type:ItemTypes.BLOCK,
+        item:{id: props.id},
         collect: (monitor) => ({
             isDragging: !!monitor.isDragging()
         })
@@ -20,5 +21,5 @@ export default function Block(props) {
         console.log(cheight);
     },[]);
 
-    return (<div className="blockRoot" ref={drag} style={{width:cwidth, height:cheight, border:'1px solid #ccc' ,background:'#07a', position:'absolute',left:cleft,top:ctop}}></div>)
+    return (<div className="blockRoot" id={props.id} ref={dragRef} style={{width:cwidth, height:cheight, border:'1px solid #ccc' ,background:'#07a', position:'absolute',left:cleft,top:ctop}}></div>)
 }
