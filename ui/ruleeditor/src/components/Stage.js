@@ -11,10 +11,10 @@ export default function Stage(props){
         <div>
             <TopMenu></TopMenu>
             <DndProvider backend={HTML5Backend}>
-            
-            <Canvas> </Canvas>
-            <Block id="block1"></Block>
-            
+            <div id="stage" className="stage" style={{position:"absolute"}}>
+                <Canvas> </Canvas>
+                <Block id="block1"></Block>
+            </div>
             </DndProvider>
         </div>
     )
