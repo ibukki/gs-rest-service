@@ -6,7 +6,7 @@ export default function Block(props) {
     let [cwidth,setCwidth] = useState("160px")
     let [cheight,setCheight] = useState("160px")
     let [cleft,setCleft] = useState(20);
-    let [ctop,setCtop] = useState(25);
+    let [ctop,setCtop] = useState(85);
 
     const [{isDragging}, dragRef] = useDrag(()=>({
         type:ItemTypes.BLOCK,
