@@ -3,12 +3,19 @@ import {ItemTypes} from './Constants'
 import { useDrag } from 'react-dnd'
 import { Menu,Button,Divider } from 'antd';
 import  '../css/block.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectBlock } from '../redux/blockDataSlice';
 
 export default function Block(props) {
+    const dispatch = useDispatch();
+
     let [cwidth,setCwidth] = useState("160px")
     let [cheight,setCheight] = useState("160px")
     let [cleft,setCleft] = useState(props.x);
     let [ctop,setCtop] = useState(props.y);
+    let [selected, setSelected] = useState(props.selected);
+
+
 
     const [{isDragging}, dragRef] = useDrag(()=>({
         type:ItemTypes.BLOCK,
@@ -19,22 +26,15 @@ export default function Block(props) {
     }))
 
     useEffect(()=>{
-        console.log("init");
         console.log(cheight);
     },[]);
 
-    let activeBlock = (evt)=>{
-        let srcElement = evt.currentTarget;
-        srcElement.className = "blockRoot active";
-    }
-
-    let inactiveBlock = (evt)=>{
-        let srcElement = evt.currentTarget;
-        srcElement.className = "blockRoot";
+    let activeBlock = (evt) =>{
+        dispatch(selectBlock(evt.currentTarget.id));
     }
 
     return (
-        <div className="blockRoot" id={props.id} ref={dragRef} style={{width:cwidth, height:cheight,background:'#07a', position:'absolute',left:cleft,top:ctop}} onClick={activeBlock} onLostPointerCapture={inactiveBlock}>
+        <div className={"blockRoot"+ (selected ? ' active' : '' )} id={props.id} ref={dragRef} style={{width:cwidth, height:cheight,background:'#07a', position:'absolute',left:cleft,top:ctop}} onClick={activeBlock}>
             <Button> Button </Button>
         </div>
     )

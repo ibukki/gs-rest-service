@@ -4,13 +4,11 @@ import Block from "./Block";
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import TopMenu from './TopMenu';
-import Item from 'antd/lib/list/Item';
 import { useDispatch, useSelector } from 'react-redux';
-import { addBlock, deleteBlock } from '../redux/blockDataSlice';
 
 export default function Stage(props){
 
-    const blocks = useSelector(state => state.blockData.value)
+    const blocks = useSelector(state => state.blockData.blocks)
     const dispatch = useDispatch();
 
 
@@ -40,21 +38,12 @@ export default function Stage(props){
     }
 
     useEffect(()=> {
-        initBlocks();
-    },[]);
+    },[dispatch]);
 
-    let initBlocks = () =>{
-        dispatch(addBlock({
-            selected:false,
-            x:10,
-            y:30
-        }));
-        dispatch(addBlock({
-            selected:false,
-            x:200,
-            y:300
-        }));
-    }
+
+//    let activeBlock = (evt)=>{
+//        dispatch(selectBlock(evt.currentTarget.id));
+//    }
 
     return (
         <div>
@@ -65,7 +54,7 @@ export default function Stage(props){
                 {
                     blocks && blocks.map(
                         (item, index) => (
-                            <Block id={'block_'+index} x={item.x} y={item.y}></Block>
+                            <Block key={item.id} id={item.id} x={item.x} y={item.y} selected={item.selected}></Block>
                         )
                     )
                 }
