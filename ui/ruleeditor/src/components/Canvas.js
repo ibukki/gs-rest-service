@@ -25,9 +25,11 @@ export default function Canvas(props) {
 
     function moveBlock(item, monitor){
         let targetOffset = monitor.getSourceClientOffset();
+
         let sourceItem = document.getElementById(item.id);
         let stageOffSetY = document.getElementById("stage").offsetTop;
-        sourceItem.style.top = (targetOffset.y - stageOffSetY)+"px";
+        
+        sourceItem.style.top = (targetOffset.y - stageOffSetY + window.scrollY )+"px";
         sourceItem.style.left = targetOffset.x+"px";
     }
 

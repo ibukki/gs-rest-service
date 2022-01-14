@@ -47,14 +47,14 @@ export default function Stage(props){
     }
 
     const renderBlocks = blockData.blocks.map((item,index)=>(
-        <Block key={item.id} id={item.id} x={item.x} y={item.y} selected={item.selected} text={item.text}></Block>
+        <Block key={item.id} id={item.id} x={item.x} y={item.y} selected={item.selected} text={item.text} width={item.width} height={item.height}></Block>
     ))
 
     useEffect(()=> {
         console.log("abc")
     },[dispatch]);
 
-    
+
     return (
         <div>
             <TopMenu></TopMenu>

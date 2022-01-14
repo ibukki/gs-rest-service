@@ -6,7 +6,7 @@ export const slice = createSlice({
         blocks:[
             {id:"block_0",selected:false,x:10,y:30, text:"1"},
             {id:"block_1",selected:false,x:200,y:300, text:"2"},
-            {id:"block_2",selected:true,x:300,y:50, text:"3"}
+            {id:"block_2",selected:true,x:300,y:50, text:"3",width:"200px", height:"60px"}
         ]
     },
     reducers:{
@@ -19,7 +19,6 @@ export const slice = createSlice({
         selectBlock: (state,action) =>{
             let blockId = action.payload;
 
-            console.log(blockId);
             const selBlock = state.blocks.find(block=>block.id == blockId);
             if(selBlock){
                 selBlock.selected = true;
