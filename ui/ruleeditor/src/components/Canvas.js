@@ -36,6 +36,7 @@ export default function Canvas(props) {
     return (
         <div ref={dropRef} className="canvasRoot" style={{width:cwidth, height:cheight, border:'1px solid #ccc' ,background:'url(/gridbg.svg) repeat', position:'relative'}}>
             <div style={{position:'absolute',height:'100%',width:'100%'}}>
+                {props.children}
                 This the canvas page
             </div>
         </div>

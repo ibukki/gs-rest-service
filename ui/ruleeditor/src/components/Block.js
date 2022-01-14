@@ -38,6 +38,11 @@ export default function Block(props) {
         <div className={"blockRoot"+ (props.selected ? ' active' : '' )} id={props.id} ref={dragRef} style={{width:cwidth, height:cheight,background:'#07a', position:'absolute',left:cleft,top:ctop}} onClick={activeBlock}>
             <Button> Button </Button>
             {props.text}
+            <svg style={{height:'100%',width:'100%',top:0,left:0,position:"absolute"}}> 
+                <g stroke="red" strokeWidth="3" fill="red">
+                    <circle id="pointRight" cx={parseInt(cwidth) - 2} cy="0" r="3"></circle>
+                </g>
+            </svg>
         </div>
     )
 }

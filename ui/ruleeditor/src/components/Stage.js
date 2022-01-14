@@ -50,6 +50,32 @@ export default function Stage(props){
         <Block key={item.id} id={item.id} x={item.x} y={item.y} selected={item.selected} text={item.text} width={item.width} height={item.height}></Block>
     ))
 
+    const drawLines = ()=>{
+        let point1 = getBlockConnectPoint("block_1");
+        let point2 = getBlockConnectPoint("block_2");
+        console.log(point1);
+        console.log(point2);
+        return (
+            <svg style={{height:"100%",width:"100%"}}>
+                <line x1={point1.x} y1={point1.y} x2={point2.x} y2={point2.y} style={{stroke:'rgb(255,0,0)',strokeWidth:2}}></line>
+            </svg>
+        )
+    }
+
+    const getBlockConnectPoint= (divId)=>{
+        let block = blockData.blocks.find(block => block.id === divId);
+        console.log(block);
+        if(block){
+            let point = {
+                x: block.x,
+                y: block.y
+            }
+            return point;
+        }
+        
+    }
+
+
     useEffect(()=> {
         console.log("abc")
     },[dispatch]);
@@ -72,7 +98,9 @@ export default function Stage(props){
             </div>
             <DndProvider backend={HTML5Backend}>
             <div id="stage" className="stage" style={{position:"relative"}}>
-                <Canvas> </Canvas>
+                <Canvas> 
+                    {drawLines()}
+                </Canvas>
                 {renderBlocks}
             </div>
             </DndProvider>
