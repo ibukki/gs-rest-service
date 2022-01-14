@@ -5,6 +5,7 @@ import { Menu,Button,Divider } from 'antd';
 import  '../css/block.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectBlock } from '../redux/blockDataSlice';
+import { addBox } from '../redux/counterSlice';
 
 export default function Block(props) {
     const dispatch = useDispatch();
@@ -34,8 +35,9 @@ export default function Block(props) {
     }
 
     return (
-        <div className={"blockRoot"+ (selected ? ' active' : '' )} id={props.id} ref={dragRef} style={{width:cwidth, height:cheight,background:'#07a', position:'absolute',left:cleft,top:ctop}} onClick={activeBlock}>
+        <div className={"blockRoot"+ (props.selected ? ' active' : '' )} id={props.id} ref={dragRef} style={{width:cwidth, height:cheight,background:'#07a', position:'absolute',left:cleft,top:ctop}} onClick={activeBlock}>
             <Button> Button </Button>
+            {props.text}
         </div>
     )
 }

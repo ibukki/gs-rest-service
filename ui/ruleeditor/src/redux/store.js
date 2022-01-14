@@ -1,8 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import blockDataReducer from './blockDataSlice';
+import counterReducer from './counterSlice';
 
 export default configureStore({
     reducer:{
-        blockData: blockDataReducer
+        blockData: blockDataReducer,
+        counter: counterReducer
     }
 })
