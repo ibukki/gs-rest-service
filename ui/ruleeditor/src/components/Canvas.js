@@ -37,8 +37,8 @@ export default function Canvas(props) {
 
         dispatch(updateBlock({
             id:item.id,
-            x: sourceItem.style.left,
-            y: sourceItem.style.top
+            x: parseInt(sourceItem.style.left),
+            y: parseInt(sourceItem.style.top)
         }));
     }
 
