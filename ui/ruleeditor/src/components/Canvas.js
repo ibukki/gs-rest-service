@@ -31,6 +31,12 @@ export default function Canvas(props) {
         
         sourceItem.style.top = (targetOffset.y - stageOffSetY + window.scrollY )+"px";
         sourceItem.style.left = targetOffset.x+"px";
+
+        redrawCanvas();
+    }
+
+    function redrawCanvas(){
+        
     }
 
     return (

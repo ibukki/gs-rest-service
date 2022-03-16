@@ -5,7 +5,7 @@ import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import TopMenu from './TopMenu';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectBlock } from '../redux/blockDataSlice';
+import { selectBlocks ,getAllConnects} from '../redux/blockDataSlice';
 import { decrement,
     increment,
     incrementByAmount,
@@ -17,6 +17,7 @@ export default function Stage(props){
     const blockData = useSelector(state => state.blockData)
     const dispatch = useDispatch();
     const count = useSelector(selectCount);
+    const connects = useSelector(getAllConnects);
 
     const boxs = useSelector(selectBox);
 
@@ -51,20 +52,28 @@ export default function Stage(props){
     ))
 
     const drawLines = ()=>{
-        let point1 = getBlockConnectPoint("block_1");
-        let point2 = getBlockConnectPoint("block_2");
-        console.log(point1);
-        console.log(point2);
+        var arr = [];
+        console.log(connects);
+        if(connects && connects.length > 0){
+            for(let idx in connects){
+                arr.push(connect(connects[idx].from.id, connects[idx].to.id));
+            }
+        }
+        return arr;
+    }
+
+    const connect = (from, to)=>{
+        let point1 = getBlockConnectPoint(from);
+        let point2 = getBlockConnectPoint(to);
+        console.log("render connect line from:" + point1.x + " to: " + point2.x);
         return (
-            <svg style={{height:"100%",width:"100%"}}>
-                <line x1={point1.x} y1={point1.y} x2={point2.x} y2={point2.y} style={{stroke:'rgb(255,0,0)',strokeWidth:2}}></line>
-            </svg>
+            <line x1={point1.x} y1={point1.y} x2={point2.x} y2={point2.y} style={{stroke:'rgb(255,0,0)',strokeWidth:2}}></line>
         )
     }
 
+
     const getBlockConnectPoint= (divId)=>{
         let block = blockData.blocks.find(block => block.id === divId);
-        console.log(block);
         if(block){
             let point = {
                 x: block.x,
@@ -98,8 +107,10 @@ export default function Stage(props){
             </div>
             <DndProvider backend={HTML5Backend}>
             <div id="stage" className="stage" style={{position:"relative"}}>
-                <Canvas> 
-                    {drawLines()}
+                <Canvas>
+                    <svg style={{height:"100%",width:"100%"}} id="svgcontainer">
+                        {drawLines()}
+                    </svg>
                 </Canvas>
                 {renderBlocks}
             </div>

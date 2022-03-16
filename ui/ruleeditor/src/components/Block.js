@@ -40,7 +40,16 @@ export default function Block(props) {
             {props.text}
             <svg style={{height:'100%',width:'100%',top:0,left:0,position:"absolute"}}> 
                 <g stroke="red" strokeWidth="3" fill="red">
-                    <circle id="pointRight" cx={parseInt(cwidth) - 2} cy="0" r="3"></circle>
+                    <circle id="pointTopRight" cx={parseInt(cwidth) - 2} cy="0" r="3"></circle>
+                </g>
+                <g stroke="red" strokeWidth="3" fill="red">
+                    <circle id="pointTopLeft" cx="-2" cy="0" r="3"></circle>
+                </g>
+                <g stroke="red" strokeWidth="3" fill="red">
+                    <circle id="pointBottomRight" cx={parseInt(cwidth) - 2} cy={parseInt(cheight) - 2} r="3"></circle>
+                </g>
+                <g stroke="red" strokeWidth="3" fill="red">
+                    <circle id="pointBottomLeft" cx="-2" cy={parseInt(cheight) - 2} r="3"></circle>
                 </g>
             </svg>
         </div>
