@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Block from "./Block";
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
+import { getBlock,updateBlock} from '../redux/blockDataSlice';
+import { useDispatch, useSelector } from 'react-redux';
 import { useDrop } from 'react-dnd'
 import { ItemTypes } from './Constants';
 
@@ -9,6 +11,7 @@ import { ItemTypes } from './Constants';
 export default function Canvas(props) {
     let [cwidth,setCwidth] = useState("1000px")
     let [cheight,setCheight] = useState("800px")
+    let dispatch = useDispatch();
 
     const [{ isOver }, dropRef] = useDrop(() => ({
         accept: ItemTypes.BLOCK,
@@ -32,11 +35,11 @@ export default function Canvas(props) {
         sourceItem.style.top = (targetOffset.y - stageOffSetY + window.scrollY )+"px";
         sourceItem.style.left = targetOffset.x+"px";
 
-        redrawCanvas();
-    }
-
-    function redrawCanvas(){
-        
+        dispatch(updateBlock({
+            id:item.id,
+            x: sourceItem.style.left,
+            y: sourceItem.style.top
+        }));
     }
 
     return (

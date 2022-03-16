@@ -35,11 +35,26 @@ export const slice = createSlice({
                     delSelBlocks[idx].selected = false;
                 }
             }
+        },
+        getBlock:(state, action) =>{
+            let blockId = action.payload;
+            const selBlock = state.blocks.find(block=>block.id == blockId);
+            return selBlock;
+        },
+
+        updateBlock: (state,action)=>{
+            let payload = action.payload;
+            let blockId = payload.id;
+            const selBlock = state.blocks.find(block=>block.id == blockId);
+            if(selBlock){
+                selBlock.x = payload.x;
+                selBlock.y = payload.y;
+            } 
         }
     }
 })
 
-export const {addBlock, deleteBlock, selectBlock} = slice.actions;
+export const {addBlock, deleteBlock, selectBlock, updateBlock,getBlock} = slice.actions;
 export const selectBlocks = state => state.blockData.blocks;
 export const getAllConnects = state => state.blockData.connects;
 export default slice.reducer;
