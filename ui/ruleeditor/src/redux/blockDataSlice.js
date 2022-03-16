@@ -5,9 +5,9 @@ export const slice = createSlice({
     name:'blockData',
     initialState:{
         blocks:[
-            {id:"block_0",selected:false,x:10,y:30, text:"1"},
-            {id:"block_1",selected:false,x:200,y:300, text:"2"},
-            {id:"block_2",selected:true,x:300,y:50, text:"3",width:"200px", height:"60px"}
+            {id:"block_0",selected:false,x:10,y:30, text:"1",w:"160",h:"160"},
+            {id:"block_1",selected:false,x:200,y:300, text:"2",w:"160",h:"160"},
+            {id:"block_2",selected:true,x:300,y:50, text:"3",w:"200", h:"60"}
         ],
         connects:[
             {from:{id:"block_0",pos:1},to:{id:"block_1",pos:1},color:"red",style:"straight"},

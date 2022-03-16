@@ -63,8 +63,8 @@ export default function Stage(props){
     }
 
     const connect = (from, to)=>{
-        let point1 = getBlockConnectPoint(from);
-        let point2 = getBlockConnectPoint(to);
+        let point1 = getBlockConnectPoint(from, to);
+        let point2 = getBlockConnectPoint(to,from);
         console.log("render connect line from:" + point1.x + " to: " + point2.x);
         return (
             <line x1={point1.x} y1={point1.y} x2={point2.x} y2={point2.y} style={{stroke:'rgb(255,0,0)',strokeWidth:2}}></line>
@@ -72,18 +72,27 @@ export default function Stage(props){
     }
 
 
-    const getBlockConnectPoint= (divId)=>{
+    const getBlockConnectPoint= (divId, targetId)=>{
         let block = blockData.blocks.find(block => block.id === divId);
-        if(block){
-            let point = {
-                x: block.x,
-                y: block.y
-            }
-            return point;
+        let targetBlock = blockData.blocks.find(block => block.id === targetId);
+        if(!block || !targetBlock) return;
+        let point = {
+            x: block.x,
+            y: block.y
+        }
+        if(block.x < targetBlock.x && block.y < targetBlock.y){
+            //use bottom right
+            console.log(block);
+            point.x = point.x + parseInt(block.w - 2);
+            point.y = point.y + parseInt(block.h - 2);
         }
         
+        return point;
     }
 
+    const queryDom = (divId) =>{
+        return document.getElementById(divId);
+    }
 
     useEffect(()=> {
         console.log("abc")

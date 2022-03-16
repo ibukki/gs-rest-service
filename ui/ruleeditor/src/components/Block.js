@@ -10,8 +10,8 @@ import { addBox } from '../redux/counterSlice';
 export default function Block(props) {
     const dispatch = useDispatch();
 
-    let [cwidth,setCwidth] = useState(props.width || "160px")
-    let [cheight,setCheight] = useState(props.height || "160px")
+    let [cwidth,setCwidth] = useState(props.w || "160px")
+    let [cheight,setCheight] = useState(props.h || "160px")
     let [cleft,setCleft] = useState(props.x);
     let [ctop,setCtop] = useState(props.y);
     let [selected, setSelected] = useState(props.selected);
