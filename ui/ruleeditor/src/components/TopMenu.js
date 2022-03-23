@@ -10,9 +10,7 @@ export  default function TopMenu(props){
     const dispatch = useDispatch();
 
     function handleClick(){
-        dispatch(addBox({
-            name:"box3"
-        }))
+        
     };
 
     return (
